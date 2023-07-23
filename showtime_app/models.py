@@ -1,15 +1,23 @@
 from django.db import models
 from django.contrib.auth.models import User
 
+def get_ticket_types():
+    return [
+        ('regular', 'Regular'),
+        ('vip', 'VIP'),
+        ('vvip', 'VVIP'),
+    ]
 
-class Show(models.Model):
+class Movie(models.Model):
     title = models.CharField(max_length=100)
     description = models.TextField()
-    performers = models.CharField(max_length=200)
     genres = models.CharField(max_length=100)
     start_time = models.DateTimeField()
     end_time = models.DateTimeField()
     venue = models.ForeignKey('Venue', on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.title
 
 
 class Venue(models.Model):
@@ -18,12 +26,18 @@ class Venue(models.Model):
     capacity = models.PositiveIntegerField()
     amenities = models.TextField()
 
+    def __str__(self):
+        return self.name
+
 
 class Ticket(models.Model):
-    show = models.ForeignKey('Show', on_delete=models.CASCADE)
-    ticket_type = models.CharField(max_length=50)
+    movie = models.ForeignKey('Movie', on_delete=models.CASCADE)
+    ticket_type = models.CharField(max_length=50, choices=get_ticket_types(), default='regular')
     price = models.DecimalField(max_digits=8, decimal_places=2)
     quantity = models.PositiveIntegerField()
+
+    def __str__(self):
+        return self.ticket_type
 
 
 class Review(models.Model):
@@ -32,14 +46,8 @@ class Review(models.Model):
     rating = models.PositiveIntegerField()
     comment = models.TextField()
 
-
-class Profile(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
-    bio = models.TextField()
-    profile_pic = models.ImageField(upload_to='profile_pics', blank=True)
-
     def __str__(self):
-        return self.user.username
+        return self.user_name
 
 
 class Order(models.Model):
