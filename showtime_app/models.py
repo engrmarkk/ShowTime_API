@@ -41,8 +41,8 @@ class Ticket(models.Model):
 
 
 class Review(models.Model):
-    show = models.ForeignKey('Show', on_delete=models.CASCADE)
-    user_name = models.CharField(max_length=50)
+    movie = models.ForeignKey('Movie', on_delete=models.CASCADE)
+    user_name = models.CharField(max_length=50, default='Anonymous')
     rating = models.PositiveIntegerField()
     comment = models.TextField()
 
