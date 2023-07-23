@@ -31,8 +31,8 @@ INSTALLED_APPS = [
     'drf_spectacular',
     'dj_rest_auth',
     'dj_rest_auth.registration',
-    'allauth',
-    'allauth.account',
+    # 'allauth',
+    # 'allauth.account',
 ]
 
 REST_FRAMEWORK = {
