@@ -13,10 +13,9 @@ class MovieList(generics.ListCreateAPIView):
     # permission_classes = (IsAuthenticated,)
 
 
-class MovieDetail(generics.RetrieveAPIView):
+class MovieDetail(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = MovieSerializer
 
     def get_object(self):
         title = self.kwargs.get('title')
-        movie = get_object_or_404(Movie, title=title)
-        return movie
+        return get_object_or_404(Movie, title=title)
