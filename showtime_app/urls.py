@@ -1,6 +1,6 @@
 from django.urls import path
-from endpoints.movie import MovieList, MovieDetail, MovieGenreList, GetMovieByCode
-from endpoints.tickets import GetTicketPriceForAMovie, CreateTicket
+from .endpoints.movie import MovieList, MovieDetail, MovieGenreList, GetMovieByCode
+from .endpoints.tickets import GetTicketPriceForAMovie, CreateTicket
 
 urlpatterns = [
     # Movies
