@@ -1,4 +1,5 @@
 from rest_framework import generics, permissions
+from rest_framework.views import APIView
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework import status
@@ -33,3 +34,13 @@ class MovieGenreList(generics.ListAPIView):
     def get_queryset(self):
         genre = self.kwargs.get('genre')
         return Movie.objects.filter(genres=genre)
+
+
+class GetMovieByCode(APIView):
+    serializer_class = MovieSerializer
+
+    def get(self, request, code):
+        movie = get_object_or_404(Movie, movie_code=code)
+        serializer = self.serializer_class(movie)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
