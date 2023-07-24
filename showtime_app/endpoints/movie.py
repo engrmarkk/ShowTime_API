@@ -14,7 +14,6 @@ class MovieList(generics.ListCreateAPIView):
 
 
 class MovieDetail(generics.RetrieveAPIView):
-    queryset = Movie.objects.all()
     serializer_class = MovieSerializer
 
     def get_object(self):
