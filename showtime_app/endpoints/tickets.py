@@ -6,6 +6,7 @@ from rest_framework import status
 from django.shortcuts import get_object_or_404
 from showtime_app.models import Movie, Venue, Ticket, Review, Order, User
 from showtime_app.serializers import TicketSerializer
+from drf_spectacular.utils import extend_schema, OpenApiParameter, OpenApiExample, OpenApiTypes
 
 
 class IsAdminUser(permissions.BasePermission):
@@ -13,6 +14,10 @@ class IsAdminUser(permissions.BasePermission):
         return request.user.is_authenticated and request.user.is_staff
 
 
+@extend_schema(
+    description='Get tickets price for a movie',
+    tags=['tickets'],
+)
 class GetTicketPriceForAMovie(APIView):
     serializer_class = TicketSerializer
     permission_classes = (permissions.IsAuthenticated,)
@@ -24,6 +29,10 @@ class GetTicketPriceForAMovie(APIView):
         return Response(serializer.data, status=status.HTTP_200_OK)
 
 
+@extend_schema(
+    description='Create a ticket',
+    tags=['tickets'],
+)
 class CreateTicket(generics.CreateAPIView):
     serializer_class = TicketSerializer
     permission_classes = (permissions.IsAuthenticated, IsAdminUser)
