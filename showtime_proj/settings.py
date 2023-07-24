@@ -43,6 +43,18 @@ INSTALLED_APPS = [
     'drf_spectacular',
 ]
 
+REST_FRAMEWORK = {
+    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.TokenAuthentication',
+    ],
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAuthenticatedOrReadOnly',
+    ]
+}
+
+SITE_ID = 1
+
 SPECTACULAR_SETTINGS = {
     'TITLE': 'Show_Time API',
     'DESCRIPTION': 'This is a web application built with Django Restframework that enables users to book tickets for movies.',
