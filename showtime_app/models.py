@@ -47,12 +47,15 @@ class Venue(models.Model):
 
 class Ticket(models.Model):
     movie = models.ForeignKey('Movie', on_delete=models.CASCADE)
-    ticket_type = models.CharField(max_length=50, choices=get_ticket_types(), default='regular')
-    price = models.DecimalField(max_digits=8, decimal_places=2)
+    regular_price = models.DecimalField(max_digits=8, decimal_places=2)
+    vip_price = models.DecimalField(max_digits=8, decimal_places=2)
+    vvip_price = models.DecimalField(max_digits=8, decimal_places=2)
+    # ticket_type = models.CharField(max_length=50, choices=get_ticket_types(), default='regular')
+    # price = models.DecimalField(max_digits=8, decimal_places=2)
     quantity = models.PositiveIntegerField(default=1)
 
     def __str__(self):
-        return self.ticket_type
+        return self.movie.title
 
 
 class Review(models.Model):
