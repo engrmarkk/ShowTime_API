@@ -8,6 +8,11 @@ from showtime_app.models import Movie, Venue, Ticket, Review, Order, User
 from showtime_app.serializers import TicketSerializer
 
 
+class IsAdminUser(permissions.BasePermission):
+    def has_permission(self, request, view):
+        return request.user.is_authenticated and request.user.is_staff
+
+
 class GetTicketPriceForAMovie(APIView):
     serializer_class = TicketSerializer
     permission_classes = (permissions.IsAuthenticated,)
@@ -17,3 +22,8 @@ class GetTicketPriceForAMovie(APIView):
         tickets = Ticket.objects.filter(movie=movie)
         serializer = self.serializer_class(tickets, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
+
+
+class CreateTicket(generics.CreateAPIView):
+    serializer_class = TicketSerializer
+    permission_classes = (permissions.IsAuthenticated, IsAdminUser)
