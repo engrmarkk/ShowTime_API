@@ -10,10 +10,22 @@ def get_ticket_types():
     ]
 
 
+def get_genres():
+    return [
+        ('action', 'Action'),
+        ('comedy', 'Comedy'),
+        ('drama', 'Drama'),
+        ('horror', 'Horror'),
+        ('romance', 'Romance'),
+        ('sci-fi', 'Sci-Fi'),
+        ('thriller', 'Thriller'),
+    ]
+
+
 class Movie(models.Model):
     title = models.CharField(max_length=100)
     description = models.TextField()
-    genres = models.CharField(max_length=100)
+    genres = models.CharField(max_length=100, choices=get_genres(), default='action')
     movie_code = models.CharField(max_length=10)
     start_time = models.DateTimeField()
     end_time = models.DateTimeField()
