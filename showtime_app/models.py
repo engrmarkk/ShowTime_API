@@ -14,6 +14,7 @@ class Movie(models.Model):
     title = models.CharField(max_length=100)
     description = models.TextField()
     genres = models.CharField(max_length=100)
+    movie_code = models.CharField(max_length=10)
     start_time = models.DateTimeField()
     end_time = models.DateTimeField()
     venue = models.ForeignKey('Venue', on_delete=models.CASCADE)
