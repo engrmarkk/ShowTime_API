@@ -6,6 +6,8 @@ from drf_spectacular.views import SpectacularAPIView, SpectacularRedocView, Spec
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include('showtime_app.urls')),
+    path('api/dj-rest-auth/', include('dj_rest_auth.urls')),
+    path('accounts/', include('allauth.urls')),
 
     # path('api/dj-rest-auth/registration/', include('dj_rest_auth.registration.urls')),
     path('api/schema/', SpectacularAPIView.as_view(), name='schema'),
