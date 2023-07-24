@@ -19,3 +19,11 @@ class MovieDetail(generics.RetrieveUpdateDestroyAPIView):
     def get_object(self):
         title = self.kwargs.get('title')
         return get_object_or_404(Movie, title=title)
+
+
+class MovieGenreList(generics.ListAPIView):
+    serializer_class = MovieSerializer
+
+    def get_queryset(self):
+        genre = self.kwargs.get('genre')
+        return Movie.objects.filter(genres=genre)
