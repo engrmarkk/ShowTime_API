@@ -1,4 +1,4 @@
-from rest_framework import generics
+from rest_framework import generics, permissions
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework import status
@@ -13,8 +13,14 @@ class MovieList(generics.ListCreateAPIView):
     # permission_classes = (IsAuthenticated,)
 
 
+class IsAdminUser(permissions.BasePermission):
+    def has_permission(self, request, view):
+        return request.user.is_authenticated and request.user.is_staff
+
+
 class MovieDetail(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = MovieSerializer
+    permission_classes = (permissions.IsAuthenticated, IsAdminUser)
 
     def get_object(self):
         title = self.kwargs.get('title')
