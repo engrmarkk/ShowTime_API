@@ -1,12 +1,14 @@
 from django.db import models
 from django.contrib.auth.models import User
 
+
 def get_ticket_types():
     return [
         ('regular', 'Regular'),
         ('vip', 'VIP'),
         ('vvip', 'VVIP'),
     ]
+
 
 class Movie(models.Model):
     title = models.CharField(max_length=100)
@@ -60,4 +62,4 @@ class Order(models.Model):
     payment_status = models.BooleanField(default=False)
 
     def __str__(self):
-        return self.user.username
+        return self.user
