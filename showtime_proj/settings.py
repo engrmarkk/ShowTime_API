@@ -13,7 +13,7 @@ SECRET_KEY = 'django-insecure-bdo-#^brl6$9n+$uhvjx8*6o!fge#u$h@r7l0e1efjeyx6!ds4
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
