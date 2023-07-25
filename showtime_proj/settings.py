@@ -32,7 +32,7 @@ INSTALLED_APPS = [
     'dj_rest_auth',
     'dj_rest_auth.registration',
     'allauth',
-    # 'allauth.account',
+    'allauth.account',
 ]
 
 REST_FRAMEWORK = {
@@ -85,6 +85,31 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'showtime_proj.wsgi.application'
+
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_EMAIL_CONFIRMATION_REQUIRED = False
+ACCOUNT_AUTHENTICATION_METHOD = 'username_email'
+ACCOUNT_USERNAME_REQUIRED = False
+
+REST_AUTH_SERIALIZERS = {
+    'LOGIN_SERIALIZER': 'dj_rest_auth.serializers.EmailLoginSerializer',
+}
+
+AUTHENTICATION_BACKENDS = [
+    # Needed to log in by username in Django admin, regardless of `allauth`
+    "django.contrib.auth.backends.ModelBackend",
+
+    # `allauth` specific authentication methods, such as login by e-mail
+    "allauth.account.auth_backends.AuthenticationBackend",
+]
+
+REST_AUTH_REGISTER_SERIALIZERS = {'REGISTER_SERIALIZER': 'Showtime_app.serializers.RegisterSerializer'}
+
+REST_AUTH = {
+    'OLD_PASSWORD_FIELD_ENABLED': True,
+}
 
 
 # Database
