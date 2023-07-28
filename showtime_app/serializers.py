@@ -68,7 +68,6 @@ class CustomRegisterSerializer(serializers.Serializer):
         return user
 
 
-
 class TicketSerializer(serializers.ModelSerializer):
     class Meta:
         model = Ticket
