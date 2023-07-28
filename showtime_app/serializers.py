@@ -11,26 +11,26 @@ class MovieSerializer(serializers.ModelSerializer):
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
-        model = User
-        fields = ['id', 'username', 'email', 'first_name', 'last_name']
+        model = CustomUser
+        fields = ['id', 'username', 'email', 'firstname', 'lastname']
 
 
 class CustomRegisterSerializer(serializers.Serializer):
-    first_name = serializers.CharField(max_length=255, required=True)
-    last_name = serializers.CharField(max_length=255, required=True)
+    firstname = serializers.CharField(max_length=255, required=True)
+    lastname = serializers.CharField(max_length=255, required=True)
     username = serializers.CharField(max_length=255, required=True)
     email = serializers.EmailField(max_length=255)
     password1 = serializers.CharField(max_length=255, write_only=True)
     password2 = serializers.CharField(max_length=255, write_only=True)
 
     def validate_email(self, value):
-        qs = User.objects.filter(email__iexact=value)
+        qs = CustomUser.objects.filter(email__iexact=value)
         if qs.exists():
             raise serializers.ValidationError("Email already exists")
         return value
 
     def validate_username(self, value):
-        qs = User.objects.filter(username__iexact=value)
+        qs = CustomUser.objects.filter(username__iexact=value)
         if qs.exists():
             raise serializers.ValidationError("Username already exists")
         return value
@@ -55,15 +55,17 @@ class CustomRegisterSerializer(serializers.Serializer):
         }
 
     def save(self, request):
-        data = self.get_cleaned_data(self.validated_data)
-        user = User.objects.create_user(
-            username=data['username'],
-            email=data['email'],
-            first_name=data['first_name'],
-            last_name=data['last_name']
+        user = CustomUser.objects.create_user(
+            username=self.validated_data['username'],
+            email=self.validated_data['email'],
+            firstname=self.validated_data['firstname'],
+            lastname=self.validated_data['lastname'],
+            phone=self.validated_data['phone'],
         )
-        user.set_password(data['password'])
+        user.set_password(self.validated_data['password1'])
+        user.save()
         return user
+
 
 
 class TicketSerializer(serializers.ModelSerializer):
