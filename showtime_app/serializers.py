@@ -30,6 +30,7 @@ class CustomRegisterSerializer(serializers.Serializer):
         return value
 
     def validate_username(self, value):
+        # this is for case insensitive username
         qs = CustomUser.objects.filter(username__iexact=value)
         if qs.exists():
             raise serializers.ValidationError("Username already exists")
@@ -56,10 +57,10 @@ class CustomRegisterSerializer(serializers.Serializer):
 
     def save(self, request):
         user = CustomUser.objects.create_user(
-            username=self.validated_data['username'],
-            email=self.validated_data['email'],
-            firstname=self.validated_data['firstname'],
-            lastname=self.validated_data['lastname'],
+            username=self.validated_data['username'].lower(),
+            email=self.validated_data['email'].lower(),
+            firstname=self.validated_data['firstname'].lower(),
+            lastname=self.validated_data['lastname'].lower(),
             phone=self.validated_data['phone'],
         )
         user.set_password(self.validated_data['password1'])
