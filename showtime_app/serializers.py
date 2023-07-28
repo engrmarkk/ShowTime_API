@@ -9,6 +9,12 @@ class MovieSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
+class UserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ['id', 'username', 'email', 'first_name', 'last_name']
+
+
 class CustomRegisterSerializer(serializers.Serializer):
     first_name = serializers.CharField(max_length=255)
     last_name = serializers.CharField(max_length=255)
