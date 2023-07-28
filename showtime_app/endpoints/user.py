@@ -14,7 +14,7 @@ class ListAllUsers(generics.ListAPIView):
     # permission_classes = [IsAuthenticated]
 
 
-class DestroyAllUsers(generics.DestroyAPIView):
+class DestroyUser(generics.DestroyAPIView):
     queryset = CustomUser.objects.all()
     serializer_class = UserSerializer
     permission_classes = [AllowAny, ]
