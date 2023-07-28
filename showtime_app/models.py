@@ -83,7 +83,7 @@ class Review(models.Model):
 
 
 class Order(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
     movie = models.ForeignKey('Movie', on_delete=models.CASCADE)
     ticket_type = models.CharField(max_length=50, choices=get_ticket_types())
     quantity = models.PositiveIntegerField()

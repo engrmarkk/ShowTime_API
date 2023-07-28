@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from showtime_app.models import Movie, Venue, Ticket, Review, Order, User
+from showtime_app.models import Movie, Venue, Ticket, Review, Order, CustomUser
 from rest_framework.exceptions import ValidationError
 
 
