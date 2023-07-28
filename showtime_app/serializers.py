@@ -16,9 +16,9 @@ class UserSerializer(serializers.ModelSerializer):
 
 
 class CustomRegisterSerializer(serializers.Serializer):
-    first_name = serializers.CharField(max_length=255)
-    last_name = serializers.CharField(max_length=255)
-    username = serializers.CharField(max_length=255)
+    first_name = serializers.CharField(max_length=255, required=True)
+    last_name = serializers.CharField(max_length=255, required=True)
+    username = serializers.CharField(max_length=255, required=True)
     email = serializers.EmailField(max_length=255)
     password1 = serializers.CharField(max_length=255, write_only=True)
     password2 = serializers.CharField(max_length=255, write_only=True)
