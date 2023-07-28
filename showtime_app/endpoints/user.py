@@ -3,13 +3,13 @@ from rest_framework import generics
 # from rest_framework.response import Response
 # from rest_framework import status
 # from django.shortcuts import get_object_or_404
-from showtime_app.models import User
+from showtime_app.models import CustomUser
 from showtime_app.serializers import UserSerializer, CustomRegisterSerializer
 from dj_rest_auth.registration.views import RegisterView
 
 
 class ListAllUsers(generics.ListAPIView):
-    queryset = User.objects.all()
+    queryset = CustomUser.objects.all()
     serializer_class = UserSerializer
     # permission_classes = [IsAuthenticated]
 
