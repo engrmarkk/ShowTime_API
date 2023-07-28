@@ -33,6 +33,7 @@ INSTALLED_APPS = [
     'dj_rest_auth.registration',
     'allauth',
     'allauth.account',
+    # 'allauth_socialaccount'
 ]
 
 REST_FRAMEWORK = {
