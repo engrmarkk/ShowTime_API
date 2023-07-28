@@ -56,7 +56,7 @@ class CustomRegisterSerializer(serializers.Serializer):
         }
 
     def save(self, request):
-        user = CustomUser.objects.create_user(
+        user = CustomUser.objects.create(
             username=self.validated_data['username'].lower(),
             email=self.validated_data['email'].lower(),
             firstname=self.validated_data['firstname'].lower(),
