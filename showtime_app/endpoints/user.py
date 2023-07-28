@@ -1,5 +1,5 @@
 from rest_framework import generics
-# from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import IsAuthenticated, AllowAny
 # from rest_framework.response import Response
 # from rest_framework import status
 # from django.shortcuts import get_object_or_404
@@ -12,6 +12,12 @@ class ListAllUsers(generics.ListAPIView):
     queryset = CustomUser.objects.all()
     serializer_class = UserSerializer
     # permission_classes = [IsAuthenticated]
+
+
+class DestroyAllUsers(generics.DestroyAPIView):
+    queryset = CustomUser.objects.all()
+    serializer_class = UserSerializer
+    permission_classes = [AllowAny, ]
 
 
 class CustomRegisterView(RegisterView):

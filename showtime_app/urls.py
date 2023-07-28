@@ -1,7 +1,7 @@
 from django.urls import path
 from .endpoints.movie import MovieList, MovieDetail, MovieGenreList, GetMovieByCode
 from .endpoints.tickets import GetTicketPriceForAMovie, CreateTicket
-from .endpoints.user import ListAllUsers, CustomRegisterView
+from .endpoints.user import ListAllUsers, CustomRegisterView, DestroyAllUsers
 
 urlpatterns = [
     # Movies
@@ -13,6 +13,7 @@ urlpatterns = [
     # Users
     path('all_users/', ListAllUsers.as_view(), name='user-list'),
     path('register/', CustomRegisterView.as_view(), name='register'),
+    path('delete_all_users/', DestroyAllUsers.as_view(), name='delete-all-users'),
 
     # Tickets
     path('tickets/<str:movie_code>/', GetTicketPriceForAMovie.as_view(), name='ticket-price'),
