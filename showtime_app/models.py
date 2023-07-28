@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin
 
 
 def get_ticket_types():
@@ -20,6 +21,22 @@ def get_genres():
         ('sci-fi', 'Sci-Fi'),
         ('thriller', 'Thriller'),
     ]
+
+
+class CustomUser(AbstractBaseUser, PermissionsMixin):
+    email = models.EmailField(max_length=255, unique=True)
+    firstname = models.CharField(max_length=255, default="", blank=True)
+    lastname = models.CharField(max_length=255, default="", blank=True)
+    phone = models.CharField(max_length=255)
+    is_staff = models.BooleanField(default=False)
+    is_active = models.BooleanField(default=True)
+    date_joined = models.DateTimeField(auto_now_add=True)
+
+    USERNAME_FIELD = "email"
+    REQUIRED_FIELDS = []
+
+    def __str__(self):
+        return self.email
 
 
 class Movie(models.Model):
