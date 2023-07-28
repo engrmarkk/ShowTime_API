@@ -52,6 +52,7 @@ class CustomRegisterSerializer(serializers.Serializer):
             'last_name': data.get('last_name', ''),
             'username': data.get('username', ''),
             'email': data.get('email', ''),
+            'phone': data.get('phone', ''),
             'password': data.get('password1', ''),
         }
 
