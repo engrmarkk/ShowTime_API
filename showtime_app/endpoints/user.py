@@ -1,8 +1,9 @@
 from rest_framework import generics
+from rest_framework.views import APIView
 from rest_framework.permissions import IsAuthenticated, AllowAny
-# from rest_framework.response import Response
-# from rest_framework import status
-# from django.shortcuts import get_object_or_404
+from rest_framework.response import Response
+from rest_framework import status
+from django.shortcuts import get_object_or_404
 from showtime_app.models import CustomUser
 from showtime_app.serializers import UserSerializer, CustomRegisterSerializer
 from dj_rest_auth.registration.views import RegisterView
@@ -14,10 +15,17 @@ class ListAllUsers(generics.ListAPIView):
     # permission_classes = [IsAuthenticated]
 
 
-class DestroyUser(generics.DestroyAPIView):
-    queryset = CustomUser.objects.all()
-    serializer_class = UserSerializer
-    permission_classes = [AllowAny, ]
+# class DestroyUser(generics.DestroyAPIView):
+#     queryset = CustomUser.objects.all()
+#     serializer_class = UserSerializer
+#     permission_classes = [AllowAny, ]
+
+
+class DeleteUser(APIView):
+    def delete(self, request, pk):
+        user = get_object_or_404(CustomUser, pk=pk)
+        user.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
 
 
 class CustomRegisterView(RegisterView):
