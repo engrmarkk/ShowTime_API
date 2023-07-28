@@ -20,6 +20,7 @@ class CustomRegisterSerializer(serializers.Serializer):
     lastname = serializers.CharField(max_length=255, required=True)
     username = serializers.CharField(max_length=255, required=True)
     email = serializers.EmailField(max_length=255)
+    phone = serializers.CharField(max_length=255, required=True)
     password1 = serializers.CharField(max_length=255, write_only=True)
     password2 = serializers.CharField(max_length=255, write_only=True)
 
