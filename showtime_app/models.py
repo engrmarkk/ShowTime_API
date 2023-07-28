@@ -25,6 +25,7 @@ def get_genres():
 
 class CustomUser(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(max_length=255, unique=True)
+    username = models.CharField(max_length=255, default="", blank=True)
     firstname = models.CharField(max_length=255, default="", blank=True)
     lastname = models.CharField(max_length=255, default="", blank=True)
     phone = models.CharField(max_length=255)
