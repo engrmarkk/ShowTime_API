@@ -54,21 +54,16 @@ class CustomRegisterSerializer(serializers.Serializer):
             'password': data.get('password1', ''),
         }
 
-    def save(self, validated_data):
-        first_name = validated_data['first_name']
-        last_name = validated_data['last_name']
-        username = validated_data['username']
-        email = validated_data['email']
-        password = validated_data['password']
-        user_obj = User(
-            first_name=first_name,
-            last_name=last_name,
-            username=username,
-            email=email,
+    def save(self, request):
+        data = self.get_cleaned_data(self.validated_data)
+        user = User.objects.create_user(
+            username=data['username'],
+            email=data['email'],
+            first_name=data['first_name'],
+            last_name=data['last_name']
         )
-        user_obj.set_password(password)
-        user_obj.save()
-        return validated_data
+        user.set_password(data['password'])
+        return user
 
 
 class TicketSerializer(serializers.ModelSerializer):
