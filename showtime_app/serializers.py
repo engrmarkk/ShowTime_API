@@ -9,7 +9,7 @@ class MovieSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
-class UserSerializer(serializers.ModelSerializer):
+class CustomRegisterSerializer(serializers.Serializer):
     first_name = serializers.CharField(max_length=255)
     last_name = serializers.CharField(max_length=255)
     username = serializers.CharField(max_length=255)
@@ -48,13 +48,7 @@ class UserSerializer(serializers.ModelSerializer):
             'password': data.get('password1', ''),
         }
 
-
-
-    # class Meta:
-    #     model = User
-    #     fields
-
-    def create(self, validated_data):
+    def save(self, validated_data):
         first_name = validated_data['first_name']
         last_name = validated_data['last_name']
         username = validated_data['username']
