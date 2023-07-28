@@ -42,7 +42,7 @@ class CustomRegisterSerializer(serializers.Serializer):
             raise serializers.ValidationError("Password must be at least 8 characters")
         return value
 
-    def validate_passwords(self, data):
+    def validate(self, data):
         if data['password1'] != data['password2']:
             raise serializers.ValidationError("Passwords must match")
         return data
