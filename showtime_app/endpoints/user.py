@@ -23,6 +23,7 @@ class ListAllUsers(generics.ListAPIView):
 
 class DeleteUser(APIView):
     permission_classes = [AllowAny, ]
+
     def delete(self, request, pk):
         user = get_object_or_404(CustomUser, pk=pk)
         user.delete()
