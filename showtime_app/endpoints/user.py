@@ -15,19 +15,14 @@ class ListAllUsers(generics.ListAPIView):
     # permission_classes = [IsAuthenticated]
 
 
-# class DestroyUser(generics.DestroyAPIView):
-#     queryset = CustomUser.objects.all()
-#     serializer_class = UserSerializer
-#     permission_classes = [AllowAny, ]
-
-
-class DeleteUser(APIView):
+class DeleteUser(generics.DestroyAPIView):
+    queryset = CustomUser.objects.all()
     permission_classes = [AllowAny, ]
 
-    def delete(self, request, pk):
-        user = get_object_or_404(CustomUser, pk=pk)
-        user.delete()
-        return Response(status=status.HTTP_204_NO_CONTENT)
+    def delete(self, request, *args, **kwargs):
+        instance = self.get_object()
+        self.perform_destroy(instance)
+        return Response({"message": "User deleted successfully."}, status=status.HTTP_204_NO_CONTENT)
 
 
 class CustomRegisterView(RegisterView):
