@@ -25,6 +25,12 @@ class DeleteUser(generics.DestroyAPIView):
         return Response({"message": "User deleted successfully."}, status=status.HTTP_204_NO_CONTENT)
 
 
+class GetUser(generics.RetrieveAPIView):
+    queryset = CustomUser.objects.all()
+    serializer_class = UserSerializer
+    permission_classes = [AllowAny, ]
+
+
 class CustomRegisterView(RegisterView):
     serializer_class = CustomRegisterSerializer
 
