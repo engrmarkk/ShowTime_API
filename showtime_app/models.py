@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin
-from .serializers import CustomRegisterSerializer
+# from .serializers import CustomRegisterSerializer
 
 
 def get_ticket_types():
