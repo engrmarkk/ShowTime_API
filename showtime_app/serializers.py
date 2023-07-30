@@ -43,8 +43,8 @@ class CustomRegisterSerializer(serializers.Serializer):
         return value
 
     def validate_phone(self, value):
-        if not value.isdigit():
-            raise serializers.ValidationError("Phone number must be digits")
+        if not value.isdigit() or len(value) < 10:
+            raise serializers.ValidationError("Invalid phone number")
         return value
 
     def validate(self, data):
