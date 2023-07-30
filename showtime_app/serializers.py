@@ -42,6 +42,11 @@ class CustomRegisterSerializer(serializers.Serializer):
             raise serializers.ValidationError("Password must be at least 8 characters")
         return value
 
+    def validate_phone(self, value):
+        if not value.isdigit():
+            raise serializers.ValidationError("Phone number must be digits")
+        return value
+
     def validate(self, data):
         if data['password1'] != data['password2']:
             raise serializers.ValidationError("Passwords must match")
