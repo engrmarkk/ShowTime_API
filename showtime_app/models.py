@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin
+from .serializers import CustomRegisterSerializer
 
 
 def get_ticket_types():
@@ -34,6 +35,8 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
 
     USERNAME_FIELD = "email"
     REQUIRED_FIELDS = []
+
+    # objects = CustomRegisterSerializer()
 
     def __str__(self):
         return self.email
