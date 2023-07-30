@@ -18,7 +18,7 @@ class ListAllUsers(generics.ListAPIView):
 class DeleteUser(generics.DestroyAPIView):
     queryset = CustomUser.objects.all()
     permission_classes = [AllowAny, ]
-    serializer_class = UserSerializer
+    # serializer_class = UserSerializer
 
     def delete(self, request, *args, **kwargs):
         instance = self.get_object()
