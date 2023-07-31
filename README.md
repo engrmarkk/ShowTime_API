@@ -14,7 +14,7 @@
 - [Django REST Framework](https://www.django-rest-framework.org/)
 
 ## Overview
-The Showtime API is a powerful tool that provides developers with access to a comprehensive set of endpoints related to entertainment shows, performances, and events. This API enables users to retrieve information about upcoming shows, show details, venues, ticketing, user reviews, and more.
+The Showtime API is a tool that provides access to a comprehensive set of endpoints related to entertainment shows, performances, and events. This API enables users to retrieve information about upcoming shows, show details, venues, ticketing, user reviews, and more.
 
 [//]: # (## Table of Contents)
 
